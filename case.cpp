@@ -41,6 +41,7 @@ bool Case::getCouleur()
 void Case::setDameSurLaCase(bool val)
 {
     dameSurLaCase=val;
+    setText("Reine");
 }
 
 void Case::setPosition(int x, int y)

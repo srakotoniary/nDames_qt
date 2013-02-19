@@ -17,29 +17,47 @@ Echequier::Echequier(QWidget * parent) : QWidget(parent)
             std::cout<<"ajout case"<<std::endl;
             if(i%2==0){
                 if(alternance==0){
-                    tableau->addWidget(new Case(i,j,true),i,j);
+                    Case *c = new Case(i,j,true);
+                    tableau->addWidget(c,i,j);
+                    listeCases.push_back(c);
                     alternance++;
                 }
 
                 else {
-                    tableau->addWidget(new Case(i,j,false),i,j);
+                    Case *c = new Case(i,j,false);
+                    tableau->addWidget(c,i,j);
+                    listeCases.push_back(c);
                     alternance--;
                 }
             }
             else{
                 if(alternance==0){
-                    tableau->addWidget(new Case(i,j,false),i,j);
+                    Case *c = new Case(i,j,false);
+                    tableau->addWidget(c,i,j);
+                    listeCases.push_back(c);
                     alternance++;
                 }
 
                 else {
-                    tableau->addWidget(new Case(i,j,true),i,j);
+                    Case *c = new Case(i,j,true);
+                    tableau->addWidget(c,i,j);
+                    listeCases.push_back(c);
                     alternance--;
                 }
             }
         }
     }
 
+
+}
+Case* Echequier::getCase(QPoint position){
+    int i= position.x();
+    int j= position.y();
+    return listeCases[i*4+j];
+}
+
+void Echequier::placerReine(QPoint position){
+    getCase(position)->setDameSurLaCase(true);
 
 }
 

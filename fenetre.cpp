@@ -13,7 +13,7 @@ Fenetre::Fenetre() : QMainWindow()
 
     connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-    //Definion barre d'outils
+    //Definion comboBox
     QComboBox *listeAlgo = new QComboBox();
     listeAlgo->addItem("Generate&Test");
     listeAlgo->addItem("Backtrack");
@@ -27,6 +27,7 @@ Fenetre::Fenetre() : QMainWindow()
     m_slider = new QSlider(Qt::Horizontal, this);
     m_slider->setGeometry(10, 60, 100, 20);
     m_slider->setRange(4,10);
+    m_slider->setValue(4);
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_lcd, SLOT(display(int))) ;
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerNbDames(int))) ;
 
@@ -40,8 +41,8 @@ Fenetre::Fenetre() : QMainWindow()
     //Definition widget central
     QWidget *zoneCentrale = new QWidget;
     QHBoxLayout *tableauEtParametre= new QHBoxLayout;
-    Echequier *tableau =new Echequier();
-    tableauEtParametre->addWidget(tableau);
+    echequier =new Echequier();
+    tableauEtParametre->addWidget(echequier);
     tableauEtParametre->addLayout(parametreDivers);
     zoneCentrale->setLayout(tableauEtParametre);
     setCentralWidget(zoneCentrale);
@@ -50,62 +51,23 @@ Fenetre::Fenetre() : QMainWindow()
 Fenetre::Fenetre(int largeur,int hauteur) : QMainWindow()
 {
 
-    //Definition de la fenetre
-    setFixedSize(largeur, hauteur);
 
-
-    //Definition de quitter
-    QMenu *menuFichier = menuBar()->addMenu("&Fichier");
-    QAction *actionQuitter = new QAction("&Quitter", this);
-    menuFichier->addAction(actionQuitter);
-
-    connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-
-    //Definion barre d'outils
-    QComboBox *listeAlgo = new QComboBox();
-    listeAlgo->addItem("Generate&Test");
-    listeAlgo->addItem("Backtrack");
-    listeAlgo->addItem("Ac-1");
-
-
-    //tuto site du zero
-    m_lcd = new QLCDNumber(this);
-    m_lcd->setSegmentStyle(QLCDNumber::Flat);
-    m_lcd->move(50, 20);
-
-    m_slider = new QSlider(Qt::Horizontal, this);
-    m_slider->setGeometry(10, 60, 100, 20);
-    m_slider->setRange(4, 10);
-    QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_lcd, SLOT(display(int))) ;
-    QObject::connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerNbDames(int))) ;
-
-    //Definir parametre cote
-    QVBoxLayout *parametreDivers = new QVBoxLayout;
-    parametreDivers->addWidget(listeAlgo);
-    parametreDivers->addWidget(m_lcd);
-    parametreDivers->addWidget(m_slider);
-    parametreDivers->addWidget(new QPushButton("Lancer"));
-
-
-    //Definition widget central
-    QWidget *zoneCentrale = new QWidget;
-    QHBoxLayout *tableauEtParametre= new QHBoxLayout;
-    QGridLayout *tableau = new QGridLayout;
-
-    tableauEtParametre->addLayout(tableau);
-    tableauEtParametre->addLayout(parametreDivers);
-
-    zoneCentrale->setLayout(tableauEtParametre);
-    setCentralWidget(zoneCentrale);
 }
 
-void Fenetre::changerNbDames(int largeur)
+void Fenetre::changerNbDames(int val)
 {
-   nDames=largeur;
+   nDames=val;
 }
 
 int Fenetre::getNbDames()
 {
     return nDames;
+}
+
+void Fenetre::AfficheSolution(QVector<QPoint> Resultat)
+{
+    for(int i=0;i<Resultat.size();i++){
+        echequier->placerReine(Resultat[i]);
+    }
 }
 
