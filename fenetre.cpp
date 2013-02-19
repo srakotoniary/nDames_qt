@@ -22,13 +22,13 @@ Fenetre::Fenetre() : QMainWindow()
     //tuto site du zero
     m_lcd = new QLCDNumber(this);
     m_lcd->setSegmentStyle(QLCDNumber::Flat);
-    m_lcd->move(50, 20);
+    m_lcd->move(20, 20);
 
     m_slider = new QSlider(Qt::Horizontal, this);
-    m_slider->setGeometry(10, 60, 150, 20);
-    m_slider->setRange(0,500);
+    m_slider->setGeometry(10, 60, 100, 20);
+    m_slider->setRange(4,10);
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_lcd, SLOT(display(int))) ;
-    QObject::connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int))) ;
+    QObject::connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerNbDames(int))) ;
 
     //Definir parametre cote
     QVBoxLayout *parametreDivers = new QVBoxLayout;
@@ -74,10 +74,10 @@ Fenetre::Fenetre(int largeur,int hauteur) : QMainWindow()
     m_lcd->move(50, 20);
 
     m_slider = new QSlider(Qt::Horizontal, this);
-    m_slider->setGeometry(10, 60, 150, 20);
-    m_slider->setRange(0, 500);
+    m_slider->setGeometry(10, 60, 100, 20);
+    m_slider->setRange(4, 10);
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_lcd, SLOT(display(int))) ;
-    QObject::connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int))) ;
+    QObject::connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerNbDames(int))) ;
 
     //Definir parametre cote
     QVBoxLayout *parametreDivers = new QVBoxLayout;
@@ -99,8 +99,13 @@ Fenetre::Fenetre(int largeur,int hauteur) : QMainWindow()
     setCentralWidget(zoneCentrale);
 }
 
-void Fenetre::changerLargeur(int largeur)
+void Fenetre::changerNbDames(int largeur)
 {
-    setFixedSize(750+largeur, 500);
+   nDames=largeur;
+}
+
+int Fenetre::getNbDames()
+{
+    return nDames;
 }
 

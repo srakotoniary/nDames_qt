@@ -8,15 +8,19 @@ class Fenetre: public QMainWindow
 Q_OBJECT
 
 public:
+    //constructeurs
     Fenetre();
     Fenetre(int largeur,int hauteur);
+    //fonctions
+    int getNbDames();
 
 public slots:
-    void changerLargeur(int largeur);
+    void changerNbDames(int largeur);
 
 private:
    QSlider *m_slider;
    QLCDNumber *m_lcd;
+   int nDames;
 };
 
 
