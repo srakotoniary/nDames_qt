@@ -15,11 +15,11 @@ public:
     //getters
     int getNbDames();
     //fonctions
-    void AfficheSolution(QVector<int> Resultat);
+    void AfficheSolution(QString typeAlgo);
 
 public slots:
     void changerNbDames(int val);
-    //void faireTourner();
+    void faireTourner();
 
 private:
    QSlider *m_slider;
@@ -28,6 +28,7 @@ private:
    QVBoxLayout *parametreDivers;
    QHBoxLayout *tableauEtParametre;
    QWidget *zoneCentrale;
+   QComboBox *listeAlgo;
    int nDames;
    Echequier *echequier;
 };

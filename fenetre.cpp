@@ -1,4 +1,5 @@
 #include "fenetre.h"
+#include <iostream>
 
 Fenetre::Fenetre() : QMainWindow()
 {
@@ -14,7 +15,7 @@ Fenetre::Fenetre() : QMainWindow()
     connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 
     //Definion comboBox
-    QComboBox *listeAlgo = new QComboBox();
+    listeAlgo = new QComboBox();
     listeAlgo->addItem("Generate&Test");
     listeAlgo->addItem("Backtrack");
     listeAlgo->addItem("Ac-1");
@@ -39,6 +40,7 @@ Fenetre::Fenetre() : QMainWindow()
     parametreDivers->addWidget(m_lcd);
     parametreDivers->addWidget(m_slider);
     lancerAlgo = new QPushButton("Lancer");
+    QObject::connect(lancerAlgo,SIGNAL(clicked()),this, SLOT(faireTourner())) ;
     parametreDivers->addWidget(lancerAlgo);
 
     //Definition widget central
@@ -54,8 +56,7 @@ Fenetre::Fenetre() : QMainWindow()
 
 Fenetre::Fenetre(int largeur,int hauteur) : QMainWindow()
 {
-
-
+//A faire pour une taille donnée
 }
 
 void Fenetre::changerNbDames(int val)
@@ -72,11 +73,33 @@ int Fenetre::getNbDames()
     return nDames;
 }
 
-void Fenetre::AfficheSolution(QVector<int> Resultat)
+void Fenetre::faireTourner()
 {
-    for(int i=0;i<Resultat.size();i++){
-        if (Resultat[i]==1)
-        echequier->placerReine(i);
+    AfficheSolution(listeAlgo->currentText());
+}
+
+void Fenetre::AfficheSolution(QString typeAlgo)
+{
+
+    if (typeAlgo=="Backtrack")
+    {
+        std::cout<<typeAlgo.toStdString()<<std::endl;
+        /*QVector<int> resultat = new QVector<int>;
+        resultat.clear();
+        for(int i=0;i<resultat.size();i++)
+        {
+            if (resultat[i]==1)
+            echequier->placerReine(i);
+        }*/
     }
+        else if (typeAlgo=="Ac-1")
+                {
+                    std::cout<<typeAlgo.toStdString()<<std::endl;
+                }
+                else if (typeAlgo=="Generate&Test")
+                        {
+                            std::cout<<typeAlgo.toStdString()<<std::endl;
+                        }
+
 }
 
