@@ -59,14 +59,14 @@ Echequier::Echequier(int nb)
 }
 
 
-Case* Echequier::getCase(QPoint position){
+Case* Echequier::getCase(int position){
     int i= position.x();
     int j= position.y();
     return listeCases[i*nbDames+j];
 }
 
 void Echequier::placerReine(int presenceReine){
-    //getCase(position)->setDameSurLaCase(true);
+    getCase(presenceReine)->setDameSurLaCase(true);
 
 }
 

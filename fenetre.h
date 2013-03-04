@@ -15,7 +15,7 @@ public:
     //getters
     int getNbDames();
     //fonctions
-    void AfficheSolution(QVector<QPoint> Resultat);
+    void AfficheSolution(QVector<int> Resultat);
 
 public slots:
     void changerNbDames(int val);
@@ -24,6 +24,10 @@ public slots:
 private:
    QSlider *m_slider;
    QLCDNumber *m_lcd;
+   QPushButton *lancerAlgo;
+   QVBoxLayout *parametreDivers;
+   QHBoxLayout *tableauEtParametre;
+   QWidget *zoneCentrale;
    int nDames;
    Echequier *echequier;
 };
