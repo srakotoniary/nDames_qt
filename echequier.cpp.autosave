@@ -60,8 +60,9 @@ Echequier::Echequier(int nb)
 
 
 Case* Echequier::getCase(int position){
-
-    return listeCases[position];
+    int i= position.x();
+    int j= position.y();
+    return listeCases[i*nbDames+j];
 }
 
 void Echequier::placerReine(int presenceReine){
