@@ -78,12 +78,17 @@ void Fenetre::faireTourner()
     AfficheSolution(listeAlgo->currentText());
 }
 
+QVector<int> Fenetre::algoBacktrack(){
+
+}
+
 void Fenetre::AfficheSolution(QString typeAlgo)
 {
 
     if (typeAlgo=="Backtrack")
     {
         std::cout<<typeAlgo.toStdString()<<std::endl;
+
         /*QVector<int> resultat = new QVector<int>;
         resultat.clear();
         for(int i=0;i<resultat.size();i++)
