@@ -5,11 +5,13 @@ Echequier::Echequier(QWidget * parent) : QWidget(parent)
 {
     setMinimumSize(700,500);
     nbDames=0;
+    listeCases.clear();
 }
 
 Echequier::Echequier(int nb)
 {
     setMinimumSize(700,500);
+    listeCases.clear();
     nbDames=nb;
 
     QImage m_image = QImage(QSize(100,100), QImage::Format_RGB32);

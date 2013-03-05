@@ -17,8 +17,14 @@ Case::Case(int x, int y, bool coul): QLabel()
     dameSurLaCase=false;
     couleur =coul;
     setMinimumSize(50,50);
-    if (couleur==true) setText("Blanc");
-    else setText("noir");
+    /*
+    QPixmap noir("./carre_noir.jpg");
+    QPixmap blanc("./carre_blanc.jpg");
+    if (couleur==true) {setText("Blanc"); setPixmap(blanc);}
+       else {setText("Noir"); setPixmap(noir);}
+       */
+    if (couleur==true) {setText("Blanc"); setStyleSheet("QLabel { background-color : blue; color : white; }");}
+    else {setText("Noir"); setStyleSheet("QLabel { background-color : black; color : white; }");}
     std::cout<<"coordonnees de la case: "<<position.x()<<","<<position.y()<<std::endl;
     // Set background colour to black
 
