@@ -1,17 +1,28 @@
 #ifndef ALGO_H
 #define ALGO_H
-#include <QtGui>
+
+#include <QVector>
 
 class Algo
 {
+public:
+    Algo(int nbR);
+    QVector<QVector<int> > generateAndTest(int x, int y, int nbReine);
+    bool positionPossible(int x, int y);
+    void affiche();
+
+    bool testEchiquier();
+
+    bool testLigne(int x, int y);
+    bool testColonne(int x, int y);
+    bool testDiag(int x, int y);
+
 private:
     QVector<QVector<int> > Echiquier;
-    int nbReine;
+    int nbReines;
+    QVector<QVector<QVector<int> > > nbSol;
+   //int  Echiquier[4][4] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
 
-public:
-    Algo(int nb);
-    int generatetest(int nbReines);
-   // QPoint placeReine(int i, int j, Qvector<QPoint> reines); //teste et place (si c'est possible) une reine a la case (i,j)
 };
 
 #endif // ALGO_H
