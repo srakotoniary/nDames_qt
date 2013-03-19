@@ -25,61 +25,39 @@ Algo::Algo(int nbR):nbReines(nbR)
     }
    // nbSol = 0;
 }
-/*
+
 bool Algo::testEchiquier(){
-  int nbLine = 0, nbColumn = 0, nbDiag = 0;
+    std::cout << "ok" << std::endl;
+    for(int i=0; i<Echiquier.size(); i++)
+        for(int j=0; j<Echiquier.size(); j++)
+            if(!testLigne(i,j) || !testColonne(i,j))    //si un des test echoue on retourne false
+                    return false;
 
-  //test ligne
-  for(int i = 0; i < nbReines; i++){
-    for(int j = 0; j < nbReines; j++){
-      if(Echiquier[i][j] == 1)
-    nbLine++;
-      if(Echiquier[j][i] == 1)
-    nbColumn++;
-    }
-
-    for(int i = 0; i < nbReines; i++){
-        for(int j = 0; j < nbReines; j++){
-            if(Echiquier[i][j] == 1){
-                std::cout << "=====" << i <<"," << j <<"========" << std::endl;
-                for(int di = 1, dj = 1; di < nbReines && dj < nbReines; di++,dj++){
-                    std::cout << "=============" << std::endl;
-                    if(Echiquier[i+di][j+dj] == 1 && (di+i < nbReines && dj+j < nbReines) )
-                        nbDiag++;
-                    std::cout << Echiquier[i-di][j+dj] <<"=============" << std::endl;
-                    if(Echiquier[i-di][j+dj] == 1 && (i-di < nbReines && dj+j < nbReines))
-                        nbDiag++;
-                    std::cout << "=============" << std::endl;
-                }
-
-                for(int di = nbReines-1, dj = nbReines-1; di > 0 && dj > 0; di--,dj--){
-                    if(Echiquier[i+di][j-dj] == 1 && (di+i >= 0 && j-dj >= 0))
-                        nbDiag++;
-                    if(Echiquier[i-di][j-dj] == 1 && (i-di >= 0 && j-dj >= 0))
-                        nbDiag++;
-                //if(essaiEchiquier[i-di][j+dj] == 1 && (i-di > 0 && dj+j > 0))
-                //std::cout << i-di << ",a" << j+dj << std::endl;
-                }
-            }
-        }
-    }
-
-   if(nbLine > 1 || nbColumn > 1 || nbDiag > 1){
-     // std::cout << "faux" << std::endl;
-      return false;
-    }
-    else{
-      nbLine = 0;
-      nbColumn = 0;
-      nbDiag = 0;
-
-    }
-  }
-
-  return true;
+    return true;
 }
-*/
 
+
+bool Algo::testColonne(int x, int y){
+    for(int i = 0; i < nbReines; i++)
+        if(Echiquier[i][y]==1 && i != x)    //si il y a est une reine sur la colonne y et différentes de la pos de x,y
+            return false;
+    return true;
+}
+
+bool Algo::testDiag(int x, int y){
+    for(int i = 0; i < nbReines; i++)
+        for(int j = 0; j < nbReines; j++)
+            if(Echiquier[i][j]==1 && i != x)    //si il y a est une reine sur la colonne y et différentes de la pos de x,y
+                return false;
+    return true;
+}
+
+bool Algo::testLigne(int x, int y){
+    for(int i = 0; i < nbReines; i++)
+        if(Echiquier[x][i]==1 && i != y)    //si il y a est une reine sur la ligne x et différentes de la pos de x,y
+            return false;
+    return true;
+}
 
 QVector<QVector<int> > Algo::generateAndTest(int x, int y, int nbReine){
   nbReine--;
@@ -96,15 +74,15 @@ QVector<QVector<int> > Algo::generateAndTest(int x, int y, int nbReine){
                     }
             }
   } else {  //...And Test
-    if(testEchiquier()){
+   // if(testEchiquier()){
         affiche();
         std::cout << "=============" << std::endl;
-        return Echiquier;
-     }//else
+     //   return Echiquier;
+    // }//else
         //return 0;
     }
   //return 1;
-  //return Echiquier;
+  return Echiquier;
 }
 
 void Algo::affiche(){
