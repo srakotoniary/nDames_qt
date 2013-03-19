@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     Algo *a = new Algo(4);
 
-    a->generateAndTest(0,0,4);
+  //  a->generateAndTest(0,0,4);
 
     return app.exec();
 }

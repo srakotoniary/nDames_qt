@@ -8,7 +8,7 @@ class Algo
 public:
     Algo(int nbR);
     QVector<QVector<int> > generateAndTest(int x, int y, int nbReine);
-    bool positionPossible(int x, int y);
+    bool placementPossible(int position);
     void affiche();
 
     bool testEchiquier();
@@ -17,8 +17,10 @@ public:
     bool testColonne(int x, int y);
     bool testDiag(int x, int y);
 
+    int nbLigne (int position);
+    int nbColonne(int position);
 private:
-    QVector<QVector<int> > Echiquier;
+    QVector<int > Echiquier;
     int nbReines;
     QVector<QVector<QVector<int> > > nbSol;
    //int  Echiquier[4][4] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
