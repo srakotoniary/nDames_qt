@@ -16,13 +16,9 @@ void initEssai(){
 
 Algo::Algo(int nbR):nbReines(nbR)
 {
-  /*  QVector<int> tmp;
-    for(int i=0; i<nbR; i++){
-        for(int j=0; j<nbR; j++)
-            tmp.push_back(0);
-        Echiquier.push_back(tmp);
-        tmp.clear();
-    }*/
+    for(int i=0; i<nbR*nbR; i++){
+            Echiquier.push_back(0);
+    }
    // nbSol = 0;
 }
 /*
@@ -111,6 +107,46 @@ void Algo::affiche(){
 }
 
 */
+
+QVector<int> Algo::generateAndTest(int x, int y, int nbReine){
+
+    QVector<int>  tmp;
+    nbReine--;
+//C
+  if(nbReine >= 0){ //generate...
+      for(int j = 0; j < nbReines; j++){
+        //      std::cout << "["<< nbReine << "," << j << "]" << std::endl;
+        //      std::cout << "["<< nbReine << "," << j << "] " << Echiquier[nbReine][j] << std::endl;
+                    if(Echiquier[nbReine][j] == 0){
+                        Echiquier[nbReine][j] = 1;
+                        tmp = generateAndTest(nbReine,j, nbReine);
+                        affiche();
+                        std::cout << tmp.empty() <<std::endl;
+                        if(!tmp.empty()){
+                            std::cout << "ok" << std::endl;
+
+                            nbSol.push_back(tmp);
+
+                        }
+                        Echiquier[nbReine][j] = 0;
+                    }
+            }
+  } else {  //...And Test
+    if(testEchiquier()){
+        std::cout << "ok" << std::endl;
+
+        affiche();
+       return Echiquier;
+    } else {
+        std::cout << "nok" << std::endl;
+
+        tmp.clear();
+        return tmp;
+    }
+  }
+
+}
+
 void Algo::affiche(){
     for(int i = 0; i < nbReines*nbReines; i++){
         std::cout << essai[i] << std::endl;
