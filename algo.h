@@ -7,7 +7,8 @@ class Algo
 {
 public:
     Algo(int nbR);
-    QVector<int > generateAndTest(int x, int y, int nbReine);
+    QVector<int > generateAndTest(int x);
+     QVector<int > testAndGenerate(int x);
     bool placementPossible(int position);
     void affiche();
 
