@@ -8,37 +8,25 @@ class Algo
 public:
     Algo(int nbR, int choix);
 
-    //========================================
-
-    bool placementPossible(int position);
-    QVector<int > generateAndTest(int x);
-    QVector<int > testAndGenerate(int x);
-    void backtrack(int x);
-
-    //=========================================
-    void initFC();
-    void forwardChecking(int x, int nb);
-    bool colonneSuivanteImpossible(int position);
-    void supprimeDomaine(int position);
-    void restaureDomaine(int position);
-    //========================================
-    void affiche();
-
     bool testEchiquier();
+    bool placementPossible(int position);
 
-    bool testLigne(int x, int y);
-    bool testColonne(int x, int y);
-    bool testDiag(int x, int y);
+    void affiche();
+    QVector<int > getSolution_i(int i);
+
+    int getNbReine();
+    int getIter();
 
     int nbLigne (int position);
     int nbColonne(int position);
 
-private:
+    virtual void execution(int x) = 0;
+
+protected:
     QVector<int > Echiquier;
-    QVector<bool > domaine;
     int nbReines;
     QVector<QVector<int> > nbSol;
-   //int  Echiquier[4][4] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
+    int nbIter;
 
 };
 

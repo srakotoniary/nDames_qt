@@ -3,11 +3,17 @@ SOURCES += \
     fenetre.cpp \
     main.cpp \
     echequier.cpp \
-    algo.cpp
+    algo.cpp \
+    generateandtest.cpp \
+    backtrack.cpp \
+    forwardchecking.cpp
 
 HEADERS += \
     case.h \
     fenetre.h \
     echequier.h \
     echequier.h \
-    algo.h
+    algo.h \
+    generateandtest.h \
+    backtrack.h \
+    forwardchecking.h
