@@ -16,7 +16,6 @@ public:
     int getNbDames();
     //fonctions
     void AfficheSolution(QString typeAlgo);
-    QVector<int> algoBacktrack();
 
 public slots:
     void changerNbDames(int val);

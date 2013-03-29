@@ -14,8 +14,6 @@ Echequier::Echequier(int nb)
     listeCases.clear();
     nbDames=nb;
 
-    QImage m_image = QImage(QSize(100,100), QImage::Format_RGB32);
-    m_image.fill(qRgb(255, 255, 255));
     tableau = new QGridLayout(this);
 
 
