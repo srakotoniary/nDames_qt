@@ -18,7 +18,7 @@ Fenetre::Fenetre() : QMainWindow()
     listeAlgo = new QComboBox();
     listeAlgo->addItem("Generate&Test");
     listeAlgo->addItem("Backtrack");
-    listeAlgo->addItem("Ac-1");
+    listeAlgo->addItem("ForwardChecking");
 
     //tuto site du zero
     m_lcd = new QLCDNumber(this);
@@ -86,22 +86,60 @@ void Fenetre::AfficheSolution(QString typeAlgo)
     if (typeAlgo=="Backtrack")
     {
         std::cout<<typeAlgo.toStdString()<<std::endl;
+        QVector<int > E;
 
-        /*QVector<int> resultat = new QVector<int>;
-        resultat.clear();
-        for(int i=0;i<resultat.size();i++)
-        {
-            if (resultat[i]==1)
-            echequier->placerReine(i);
-        }*/
+        //Réalise l'algo backtrack
+        std::cout<<getNbDames()<<std::endl;
+        Backtrack *bt = new Backtrack(getNbDames());
+
+        //Récupere la 3 ieme solution de FC
+        E = bt->getSolution_i(0);
+        std::cout << std::endl;
+
+        for(int i = 0; i<bt->getNbReine()*bt->getNbReine() ; i++){
+            std::cout << E[i] << "|";
+            if((i+1)%bt->getNbReine() == 0 )
+                std::cout << std::endl;
+            if(E[i]==1)echequier->placerReine(i);
+        }
+
     }
-        else if (typeAlgo=="Ac-1")
+        else if (typeAlgo=="ForwardChecking")
                 {
-                    std::cout<<typeAlgo.toStdString()<<std::endl;
+                    QVector<int > E;
+
+                    //Réalise l'algo forwardchecking
+                    ForwardChecking *fc = new ForwardChecking(getNbDames());
+
+                    //Récupere la 3 ieme solution de FC
+                    E = fc->getSolution_i(0);
+                    std::cout << std::endl;
+
+                    for(int i = 0; i<fc->getNbReine()*fc->getNbReine() ; i++){
+                        std::cout << E[i] << "|";
+                        if((i+1)%fc->getNbReine() == 0 )
+                            std::cout << std::endl;
+                        if(E[i]==1)echequier->placerReine(i);
+                    }
                 }
+
                 else if (typeAlgo=="Generate&Test")
                         {
+                            QVector<int > E;
                             std::cout<<typeAlgo.toStdString()<<std::endl;
+                            //Réalise l'algo generate and test
+                            GenerateAndTest *gt = new GenerateAndTest(getNbDames());
+
+                            //Récupere la 3 ieme solution de FC
+                            E = gt->getSolution_i(0);
+                            std::cout << std::endl;
+
+                            for(int i = 0; i<gt->getNbReine()*gt->getNbReine() ; i++){
+                                std::cout << E[i] << "|";
+                                if((i+1)%gt->getNbReine() == 0 )
+                                    std::cout << std::endl;
+                                if(E[i]==1)echequier->placerReine(i);
+                            }
                         }
 
 }

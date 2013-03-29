@@ -17,16 +17,14 @@ Case::Case(int x, int y, bool coul): QLabel()
     dameSurLaCase=false;
     couleur =coul;
     setMinimumSize(50,50);
-    /*
-    QPixmap noir("./carre_noir.jpg");
-    QPixmap blanc("./carre_blanc.jpg");
-    if (couleur==true) {setText("Blanc"); setPixmap(blanc);}
-       else {setText("Noir"); setPixmap(noir);}
-       */
-    if (couleur==true) {setText("Blanc"); setStyleSheet("QLabel { background-color : blue; color : white; }");}
-    else {setText("Noir"); setStyleSheet("QLabel { background-color : black; color : white; }");}
+    if (couleur==true) {setStyleSheet("QLabel { background-color : red; color : white; }");}
+    else {setStyleSheet("QLabel { background-color : blue; color : white; }");}
+
+/*
+    if (couleur==true) {setText("Blanc"); setStyleSheet("QLabel { background-color : red; color : white; }");}
+    else {setText("Noir"); setStyleSheet("QLabel { background-color : blue; color : white; }");}
     std::cout<<"coordonnees de la case: "<<position.x()<<","<<position.y()<<std::endl;
-    // Set background colour to black
+*/
 
 }
 bool Case::getDameSurLaCase()
@@ -47,7 +45,13 @@ bool Case::getCouleur()
 void Case::setDameSurLaCase(bool val)
 {
     dameSurLaCase=val;
-    setText("Reine");
+    //QString CurrentDir = QDir::currentPath();
+    //std::cout<<CurrentDir.toStdString()<<std::endl;
+    QPixmap pixmap("image/queen3.svg");
+    //std::cout<<"largeur" <<pixmap.isNull()<<std::endl;
+
+    setPixmap(pixmap.scaledToWidth(this->width()));
+    setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 void Case::setPosition(int x, int y)

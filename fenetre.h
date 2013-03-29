@@ -3,6 +3,9 @@
 
 #include <QtGui>
 #include "echequier.h"
+#include "forwardchecking.h"
+#include "generateandtest.h"
+#include "backtrack.h"
 
 class Fenetre: public QMainWindow
 {
