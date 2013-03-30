@@ -21,6 +21,7 @@ private:
     QPoint position;
     QPalette palette;
     bool couleur;
+    QPixmap pixmap;
 
 };
 

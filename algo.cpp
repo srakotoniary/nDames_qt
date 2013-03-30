@@ -55,6 +55,9 @@ int Algo::getNbReine(){
 int Algo::getIter(){
     return nbIter;
 }
+QVector<QVector<int> > Algo::getNbSol(){
+    return nbSol;
+}
 
 bool Algo::placementPossible(int position){
     int ligne = position / nbReines;

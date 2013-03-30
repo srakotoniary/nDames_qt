@@ -16,6 +16,7 @@ public:
 
     //fonctions
     void placerReine(int presenceReine);
+    void placerVide(int position);
 private:
     QGridLayout *tableau;
     QVector<Case*> listeCases;

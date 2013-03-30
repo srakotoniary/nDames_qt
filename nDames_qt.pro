@@ -6,7 +6,8 @@ SOURCES += \
     algo.cpp \
     generateandtest.cpp \
     backtrack.cpp \
-    forwardchecking.cpp
+    forwardchecking.cpp \
+    recherchelocal.cpp
 
 HEADERS += \
     case.h \
@@ -16,4 +17,5 @@ HEADERS += \
     algo.h \
     generateandtest.h \
     backtrack.h \
-    forwardchecking.h
+    forwardchecking.h \
+    recherchelocal.h

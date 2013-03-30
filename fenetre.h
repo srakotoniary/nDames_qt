@@ -6,6 +6,7 @@
 #include "forwardchecking.h"
 #include "generateandtest.h"
 #include "backtrack.h"
+#include "recherchelocal.h"
 
 class Fenetre: public QMainWindow
 {
@@ -25,6 +26,7 @@ public slots:
     void faireTourner();
     void rSuivant();
     void rPrecedent();
+    void rEffacer();
 
 private:
    QSlider *m_slider;
@@ -32,11 +34,14 @@ private:
    QPushButton *lancerAlgo;
    QPushButton *avancer;
    QPushButton *reculer;
+   QPushButton *effacer;
    QVBoxLayout *parametreDivers;
    QHBoxLayout *tableauEtParametre;
    QWidget *zoneCentrale;
    QComboBox *listeAlgo;
    int nDames;
+   int nbSol;
+   QVector<QVector<int> >listeResultat;
    QVector<int>resultat;
    Echequier *echequier;
 };

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'fenetre.h'
 **
-** Created: Fri Mar 29 19:09:48 2013
+** Created: Sat Mar 30 22:47:30 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Fenetre[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,6 +35,7 @@ static const uint qt_meta_data_Fenetre[] = {
       33,    8,    8,    8, 0x0a,
       48,    8,    8,    8, 0x0a,
       59,    8,    8,    8, 0x0a,
+      72,    8,    8,    8, 0x0a,
 
        0        // eod
 };
@@ -42,6 +43,7 @@ static const uint qt_meta_data_Fenetre[] = {
 static const char qt_meta_stringdata_Fenetre[] = {
     "Fenetre\0\0val\0changerNbDames(int)\0"
     "faireTourner()\0rSuivant()\0rPrecedent()\0"
+    "rEffacer()\0"
 };
 
 void Fenetre::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -54,6 +56,7 @@ void Fenetre::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 1: _t->faireTourner(); break;
         case 2: _t->rSuivant(); break;
         case 3: _t->rPrecedent(); break;
+        case 4: _t->rEffacer(); break;
         default: ;
         }
     }
@@ -91,9 +94,9 @@ int Fenetre::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

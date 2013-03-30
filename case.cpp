@@ -44,14 +44,24 @@ bool Case::getCouleur()
 
 void Case::setDameSurLaCase(bool val)
 {
+
+    if(val==true){
     dameSurLaCase=val;
     //QString CurrentDir = QDir::currentPath();
     //std::cout<<CurrentDir.toStdString()<<std::endl;
-    QPixmap pixmap("image/quee.svg");
+    pixmap=QPixmap("image/quee.svg");
     //std::cout<<"largeur" <<pixmap.isNull()<<std::endl;
-
-    setPixmap(pixmap.scaledToWidth(this->width()));
+    setPixmap(pixmap.scaledToHeight(50));
     setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    //setText("reine");
+
+    }
+    else{
+        setPixmap(NULL);
+        setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        //setText("vide");
+
+    }
 }
 
 void Case::setPosition(int x, int y)

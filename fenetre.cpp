@@ -5,6 +5,7 @@ Fenetre::Fenetre() : QMainWindow()
 {
     //initialisation de nbReine et solution
     nDames=0;
+    nbSol=0;
     resultat.clear();
 
     //Definition de la fenetre
@@ -23,6 +24,7 @@ Fenetre::Fenetre() : QMainWindow()
     listeAlgo->addItem("Generate&Test");
     listeAlgo->addItem("Backtrack");
     listeAlgo->addItem("ForwardChecking");
+    listeAlgo->addItem("rechercheLocale");
 
     //tuto site du zero
     m_lcd = new QLCDNumber(this);
@@ -47,12 +49,14 @@ Fenetre::Fenetre() : QMainWindow()
     QObject::connect(lancerAlgo,SIGNAL(clicked()),this, SLOT(faireTourner())) ;
     parametreDivers->addWidget(lancerAlgo);
     reculer = new QPushButton("precedent");
-    QObject::connect(reculer, SIGNAL(clicked()), this, SLOT(rPrecedent)) ;
+    QObject::connect(reculer, SIGNAL(clicked()), this, SLOT(rPrecedent())) ;
     avancer = new QPushButton("suivant");
-    QObject::connect(reculer, SIGNAL(clicked()), this, SLOT(rSuivant)) ;
+    QObject::connect(avancer, SIGNAL(clicked()), this, SLOT(rSuivant())) ;
+    effacer = new QPushButton("effacer");
+    QObject::connect(effacer, SIGNAL(clicked()), this, SLOT(rEffacer())) ;
     parametreDivers->addWidget(reculer);
     parametreDivers->addWidget(avancer);
-
+    parametreDivers->addWidget(effacer);
     //Definition widget central
     zoneCentrale = new QWidget;
     tableauEtParametre= new QHBoxLayout;
@@ -71,7 +75,7 @@ Fenetre::Fenetre(int largeur,int hauteur) : QMainWindow()
 
 void Fenetre::changerNbDames(int val)
 {
-   nDames=val;
+   nDames=val;  
    delete echequier;
    echequier= new Echequier(nDames);
    tableauEtParametre->addWidget(echequier);
@@ -89,12 +93,43 @@ void Fenetre::faireTourner()
 }
 
 void Fenetre::rPrecedent(){
-    delete echequier;
-    echequier= new Echequier(nDames);
-    tableauEtParametre->addWidget(echequier);
+
+    nbSol--;
+    if (nbSol>=0){
+        delete echequier;
+        echequier= new Echequier(nDames);
+        tableauEtParametre->addWidget(echequier);
+        resultat = listeResultat[nbSol];
+        std::cout << std::endl;
+
+        for(int i = 0; i<nDames*nDames; i++){
+            if(resultat[i]==1)echequier->placerReine(i);
+            else echequier->placerVide(i);
+        }
+    }
+    else nbSol=0;
 }
 
 void Fenetre::rSuivant(){
+
+    nbSol++;
+    if (nbSol<listeResultat.size()){
+        delete echequier;
+        echequier= new Echequier(nDames);
+        tableauEtParametre->addWidget(echequier);
+        resultat = listeResultat[nbSol];
+        std::cout << std::endl;
+
+        for(int i = 0; i<nDames*nDames; i++){
+            if(resultat[i]==1)echequier->placerReine(i);
+            else echequier->placerVide(i);
+        }
+    }
+    else nbSol=listeResultat.size();
+}
+
+void Fenetre::rEffacer(){
+
     delete echequier;
     echequier= new Echequier(nDames);
     tableauEtParametre->addWidget(echequier);
@@ -106,6 +141,8 @@ void Fenetre::AfficheSolution(QString typeAlgo)
     if(typeAlgo=="");
     else{
          resultat.clear();
+         listeResultat.clear();
+         nbSol=0;
         if (typeAlgo=="Backtrack")
     {
         //Réalise l'algo backtrack
@@ -113,7 +150,8 @@ void Fenetre::AfficheSolution(QString typeAlgo)
         Backtrack *bt = new Backtrack(getNbDames());
 
         //Récupere la 3 ieme solution de FC
-        resultat = bt->getSolution_i(0);
+        listeResultat = bt->getNbSol();
+        resultat = listeResultat[nbSol];
         std::cout << std::endl;
 
         for(int i = 0; i<bt->getNbReine()*bt->getNbReine() ; i++){
@@ -121,6 +159,7 @@ void Fenetre::AfficheSolution(QString typeAlgo)
             if((i+1)%bt->getNbReine() == 0 )
                 std::cout << std::endl;
             if(resultat[i]==1)echequier->placerReine(i);
+            else echequier->placerVide(i);
         }
 
     }
@@ -130,7 +169,8 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                     ForwardChecking *fc = new ForwardChecking(getNbDames());
 
                     //Récupere la 3 ieme solution de FC
-                    resultat = fc->getSolution_i(0);
+                    listeResultat = fc->getNbSol();
+                    resultat = listeResultat[nbSol];
                     std::cout << std::endl;
 
                     for(int i = 0; i<fc->getNbReine()*fc->getNbReine() ; i++){
@@ -138,6 +178,7 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                         if((i+1)%fc->getNbReine() == 0 )
                             std::cout << std::endl;
                         if(resultat[i]==1)echequier->placerReine(i);
+                        else echequier->placerVide(i);
                     }
                 }
 
@@ -147,8 +188,8 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                             //Réalise l'algo generate and test
                             GenerateAndTest *gt = new GenerateAndTest(getNbDames());
 
-                            //Récupere la 3 ieme solution de FC
-                            resultat = gt->getSolution_i(0);
+                            listeResultat = gt->getNbSol();
+                            resultat = listeResultat[nbSol];
                             std::cout << std::endl;
 
                             for(int i = 0; i<gt->getNbReine()*gt->getNbReine() ; i++){
@@ -156,8 +197,27 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                                 if((i+1)%gt->getNbReine() == 0 )
                                     std::cout << std::endl;
                                 if(resultat[i]==1)echequier->placerReine(i);
+                                else echequier->placerVide(i);
                             }
                         }
+        else if (typeAlgo=="rechercheLocale")
+                {
+                    std::cout<<typeAlgo.toStdString()<<std::endl;
+                    //Réalise l'algo recherche locale
+                    RechercheLocal *rl = new RechercheLocal(getNbDames(),resultat);
+
+                    listeResultat = rl->getNbSol();
+                    resultat = listeResultat[nbSol];
+                    std::cout << std::endl;
+
+                    for(int i = 0; rl->getNbReine()*rl->getNbReine() ; i++){
+                        std::cout << resultat[i] << "|";
+                        if((i+1)%rl->getNbReine() == 0 )
+                            std::cout << std::endl;
+                        if(resultat[i]==1)echequier->placerReine(i);
+                        else echequier->placerVide(i);
+                    }
+                }
     }
 }
 

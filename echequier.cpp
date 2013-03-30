@@ -66,6 +66,9 @@ Case* Echequier::getCase(int position){
 
 void Echequier::placerReine(int presenceReine){
     getCase(presenceReine)->setDameSurLaCase(true);
+}
 
+void Echequier::placerVide(int position){
+    getCase(position)->setDameSurLaCase(false);
 }
 

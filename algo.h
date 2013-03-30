@@ -16,6 +16,7 @@ public:
 
     int getNbReine();
     int getIter();
+    QVector<QVector<int> > getNbSol();
 
     int nbLigne (int position);
     int nbColonne(int position);
