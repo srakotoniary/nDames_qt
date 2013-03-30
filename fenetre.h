@@ -6,6 +6,7 @@
 #include "forwardchecking.h"
 #include "generateandtest.h"
 #include "backtrack.h"
+#include "recherchelocal.h"
 
 class Fenetre: public QMainWindow
 {
