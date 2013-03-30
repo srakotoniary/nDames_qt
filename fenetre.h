@@ -23,16 +23,21 @@ public:
 public slots:
     void changerNbDames(int val);
     void faireTourner();
+    void rSuivant();
+    void rPrecedent();
 
 private:
    QSlider *m_slider;
    QLCDNumber *m_lcd;
    QPushButton *lancerAlgo;
+   QPushButton *avancer;
+   QPushButton *reculer;
    QVBoxLayout *parametreDivers;
    QHBoxLayout *tableauEtParametre;
    QWidget *zoneCentrale;
    QComboBox *listeAlgo;
    int nDames;
+   QVector<int>resultat;
    Echequier *echequier;
 };
 
