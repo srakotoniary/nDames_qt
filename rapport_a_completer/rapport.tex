@@ -1,0 +1,165 @@
+	\documentclass[a4paper,12pt]{report}
+
+\usepackage[frenchb]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage[bookmarks=true,colorlinks,linkcolor=blue]{hyperref}
+
+\usepackage[babel]{csquotes}
+\MakeAutoQuote{«}{»}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{graphicx}
+
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{subfig}
+
+\definecolor{colKeys}{rgb}{0,0,1} 
+\definecolor{colIdentifier}{rgb}{0,0,0} 
+\definecolor{colComments}{rgb}{0,0.5,1} 
+\definecolor{colString}{rgb}{0.6,0.1,0.1} 
+
+\lstset{%configuration de listings 
+	float=hbp,% 
+	basicstyle=\ttfamily\small, % 
+	identifierstyle=\color{colIdentifier}, % 
+	keywordstyle=\color{colKeys}, % 
+	stringstyle=\color{colString}, % 
+	commentstyle=\color{colComments}, % 
+	columns=flexible, % 
+	tabsize=2, % 
+	frame=L, % 
+	frameround=tttt, % 
+	extendedchars=true, % 
+	showspaces=false, % 
+	showstringspaces=false, % 
+	numbers=left, % 
+	numberstyle=\tiny, % 
+	breaklines=true, % 
+	breakautoindent=true, % 
+	captionpos=b,%
+	emph={def,do,end,if,colorRGB,lineWidth,scale,position,rotate,square,circle,line,for,to,in,else,inc},emphstyle={\color{blue}}%
+} 
+
+\lstdefinelanguage{C}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{black},
+	identifierstyle=\color{blue},
+	keywordstyle=\color{cyan},
+	morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\lstset{commentstyle=\textit} 
+
+\title{M1 Info  \\ \normalsize N-REINES}
+\author{Mickaël \textsc{Guillot} \\ Sombi \textsc{Rakotoniary} }
+\date{\today}
+
+\begin{document}
+
+
+%En-tête
+	\lhead{Mickaël \textsc{G.} Sombi \textsc{R.}}
+	\rhead{N-Reines \emph{Projet} - 2013}
+	\renewcommand{\headrulewidth}{0.001pt}
+
+	
+	\pagestyle{fancy}
+	\fancypagestyle{plain}
+
+
+
+	\maketitle
+
+	\tableofcontents
+\newpage
+\section*{Introduction}
+Le problème à modéliser correspond au problèmes dit des N-reines. Il s'agit de placer N\footnote{nombre entier supérieur à 0} reines sur un échequier de taille N*N. La contrainte principale est que deux reines ne doivent pas se menacer. Cette règles regroupes trois contraintes. Elles indiquent que 2 reines n'ont pas le droit d'être sur la même ligne, même colonne ou même diagonale. Ces règles s'appliquent à un ensemble de cases ayant une position unique et dont le contenu peut être une reine ou rien.
+\\\\Dans un premier temps,  nous allons voir la structure de notre programme pour bien comprendre son fonctionnement puis nous expliciterons les algorithmes.
+
+
+\newpage
+
+\chapter{Programme}
+Pour développer notre programme nous avons choisi le langage C++ au travers la bibliothèque Qt. Ce choix a été fait afin de modéliser et d'afficher nos résultats avec un échequier et des reines.
+	\section{Classes}
+	Les clasees sont séparées en deux grandes parties, la première pour modéliser et afficher les résultats, la deuxième pour calculer ces mêmes résultats. 
+		\subsubsection{Fenêtre}
+			\begin{tabular}{|l|l|}
+				\hline
+				Classe & Utilisation \\
+				\hline
+				case & modélise le domaine \{0,1\} qui représente le vide ou une reine\\
+				& modélise la variable unique \{0,1,...,Nb\} qui correspond à la position dans l'échequier
+				\\
+				échequier & modélise et affiche le contenu de l'échequier\\
+				fenêtre & modélise et affiche le choix des algoritmes et des solutions \\
+				\hline
+				
+			\end{tabular}
+		\subsubsection{Algorithmes}
+			\begin{tabular}{|l|l|}
+				\hline
+				Classe & Utilisation \\
+				\hline
+				algo & Utilisation \\
+				backtrack & modélise l'algorithme backtracking\\
+				forwardchecking & modélise l'algorithme forward checking\\
+				generateandtest & modélise l'algorithme generate and test\\
+				recherchelocal & modélise l'algorithme recherce locale \\
+				
+				\hline
+			\end{tabular}
+
+	\section{Utilisation}
+		\subsubsection{Choix de l'algorithme}
+		Pour afficher un résultat il est nécessaire de choisir tout d'abord un algorithme de recherche. Pour cela, il faut choisir dans la liste suivante une des possibilités:
+\begin{itemize}
+  \item Generate and test
+  \item Backtracking
+  \item Forward Checking
+  \item Recherche locale
+\end{itemize}
+		\subsubsection{Afficher résultat}
+		Une fois l'algorithme choisi, le bouton lancer permet d'afficher la première solution trouvée puis il est possible de faire défiler les solutions grâce aux boutons suivant et précédent. 
+
+\chapter{Algorithmes}
+	\section{Generate and test}
+	\subsubsection{Principe}
+	L'algorithme de Generate and test\footnote{générer et tester}consiste à générer toutes les solutions possibles sans tenir compte des contraintes imposées. L'étape suivante permet de tester les contraintes sur chaque solution trouvée et s'arrête lorsque l'on trouve une solution satisfaisante. 
+	\subsubsection{Avis}
+	L'avantage de cet algorithme repose dans sa simplicité en revanche il demande de stocker tout les resultats avant les tests. Cela implique une bonne gestion de la mémoire et une estimation de la capacité à exploiter les résultats en terme de temps.
+
+	\section{Backtracking}
+	\subsubsection{Principe}
+	L'algorithme Backtracking\footnote{retourner en arrière} est une amélioration de generate and test. Il consiste à tester au fur et à mesure qu'on place les reines les contraintes. Si une contrainte n'est pas satisfaite alors il est inutile de continuer à placer les reines. On retourne en arrière à la dernière solution satisfaisante pour essayer une autre configuration.
+	\subsubsection{Avis}
+	Plus efficace dans les tests, cet algorithme permet d'élaguer plusieurs solutions insatisfaisantes d'un seul coup.
+	\section{Forward Checking}
+	\subsubsection{Principe}
+	L'algorithme Forward Checking\footnote{vérifier en avant} est une amélioration de Backtrack. Lors de l'attribution d'une reine à une case, les cases non satisfaisantes sont supprimés des choix possibles des futures reines. S'il n'existe plus de choix satisfaisant ls contraintes alors on retourne à la dernière solution satisfaisante pour essayer une autre configuration.
+	\subsubsection{Avis}
+	Plus efficace dans les tests, cet algorithme permet d'élaguer plus vite les solutions insatisfaisantes. Ainsi la contrainte de mémoire est moindre.
+	
+	\section{Recherche locale}
+	
+
+	\newpage	
+	\section*{Conclusion}
+	Ce projet a permis de constater les différences d'efficacité entre les algorithmes implémentés.. a finir
+
+
+
+
+\end{document}
