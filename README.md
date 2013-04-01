@@ -1,2 +1,1 @@
-acces sécurisé 2
-Coucou!
+Pour compiler le programme, il est nécessaire de posséder les bibliotheque Qt

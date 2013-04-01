@@ -149,7 +149,7 @@ void Fenetre::AfficheSolution(QString typeAlgo)
         std::cout<<getNbDames()<<std::endl;
         Backtrack *bt = new Backtrack(getNbDames());
 
-        //Récupere la 3 ieme solution de FC
+
         listeResultat = bt->getNbSol();
         resultat = listeResultat[nbSol];
         std::cout << std::endl;
@@ -168,7 +168,7 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                     //Réalise l'algo forwardchecking
                     ForwardChecking *fc = new ForwardChecking(getNbDames());
 
-                    //Récupere la 3 ieme solution de FC
+
                     listeResultat = fc->getNbSol();
                     resultat = listeResultat[nbSol];
                     std::cout << std::endl;
@@ -204,7 +204,14 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                 {
                     std::cout<<typeAlgo.toStdString()<<std::endl;
                     //Réalise l'algo recherche locale
-                    RechercheLocal *rl = new RechercheLocal(getNbDames(),resultat);
+                    QVector<int> positionReine;
+                    positionReine.clear();
+                    int aleatoire=0;
+                    for(int i=0; i<nDames; i++){
+                        positionReine.push_back(aleatoire);
+                        aleatoire=aleatoire+nDames;
+                    }
+                    RechercheLocal *rl = new RechercheLocal(getNbDames(),positionReine);
 
                     listeResultat = rl->getNbSol();
                     resultat = listeResultat[nbSol];
