@@ -1,2 +1,9 @@
-acces sécurisé 2
-Coucou!
+#Pour compiler le programme, il est nécessaire de posséder les bibliotheque Qt
+
+Pour lancer le programme ouvrir le termnial et taper les commandes suivantes :
+	1   qmake nDames_qt.pro
+	2   make
+	3   make
+	4   ./nDames_qt
+
+	

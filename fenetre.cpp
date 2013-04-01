@@ -34,8 +34,8 @@ Fenetre::Fenetre() : QMainWindow()
 
     m_slider = new QSlider(Qt::Horizontal, this);
     m_slider->setGeometry(10, 60, 100, 20);
-    m_slider->setRange(0,10);
-    m_slider->setValue(0);
+    m_slider->setRange(4,10);
+    m_slider->setValue(4);
 
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), m_lcd, SLOT(display(int))) ;
     QObject::connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerNbDames(int))) ;
@@ -213,18 +213,21 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                     }
                     RechercheLocal *rl = new RechercheLocal(getNbDames(),positionReine);
 
-                    listeResultat = rl->getNbSol();
-                    resultat = listeResultat[nbSol];
-                    std::cout << std::endl;
+                   // listeResultat = rl->getNbSol();
+                    if (!listeResultat.empty())
+                    {
+                        resultat = listeResultat[nbSol];
+                        std::cout << std::endl;
 
-                    for(int i = 0; rl->getNbReine()*rl->getNbReine() ; i++){
-                        std::cout << resultat[i] << "|";
-                        if((i+1)%rl->getNbReine() == 0 )
-                            std::cout << std::endl;
-                        if(resultat[i]==1)echequier->placerReine(i);
-                        else echequier->placerVide(i);
+                        for(int i = 0; rl->getNbReine()*rl->getNbReine() ; i++){
+                            std::cout << resultat[i] << "|";
+                            if((i+1)%rl->getNbReine() == 0 )
+                                std::cout << std::endl;
+                            if(resultat[i]==1)echequier->placerReine(i);
+                            else echequier->placerVide(i);
+                        }
                     }
-                }
+                 }
     }
 }
 
