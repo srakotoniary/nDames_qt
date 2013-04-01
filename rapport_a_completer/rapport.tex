@@ -148,16 +148,38 @@ Pour développer notre programme nous avons choisi le langage C++ au travers la 
 	Plus efficace dans les tests, cet algorithme permet d'élaguer plusieurs solutions insatisfaisantes d'un seul coup.
 	\section{Forward Checking}
 	\subsubsection{Principe}
-	L'algorithme Forward Checking\footnote{vérifier en avant} est une amélioration de Backtrack. Lors de l'attribution d'une reine à une case, les cases non satisfaisantes sont supprimés des choix possibles des futures reines. S'il n'existe plus de choix satisfaisant ls contraintes alors on retourne à la dernière solution satisfaisante pour essayer une autre configuration.
+	L'algorithme Forward Checking\footnote{vérifier en avant} est une amélioration de Backtrack. Lors de l'attribution d'une reine à une case, les cases non satisfaisantes sont supprimés des choix possibles des futures reines. S'il n'existe plus de choix satisfaisant les contraintes alors on retourne à la dernière solution satisfaisante pour essayer une autre configuration.
 	\subsubsection{Avis}
 	Plus efficace dans les tests, cet algorithme permet d'élaguer plus vite les solutions insatisfaisantes. Ainsi la contrainte de mémoire est moindre.
 	
 	\section{Recherche locale}
-	
-
+	La rechercher est une méta-heuristique utilisée pour résoudre des problèmes d'optimisation difficiles.  Les algorithmes de recherche locale passent d'une solution à une autre en utilisant une stratégie de recherche dans chaque voisinage jusqu'à ce qu'une solution considérée comme optimale soit trouvée. Dans notre cas à chaque voisinage (ici une colonne) on choisit la première case ayant le moins de conflit. Puis on passe au voisinage suivant jusqu'à avoir une solution viable ou qu'il n'est plus de choix possible c'est-à-dire que pour chaque voisinages il ne trouve pas de meilleur solution.
+ 
 	\newpage	
 	\section*{Conclusion}
 	Ce projet a permis de constater les différences d'efficacité entre les algorithmes implémentés.. a finir
+	
+	\subsubsection{Donnees}
+			\begin{tabular}{|c|c|c|c|c|c|c|c|}
+				\hline
+				n & nb Sol. & it. GT & tp. GT & it. BT & tp. BT & it. FC & tp. FC  \\
+				\hline
+				4 & 2 & 341 & 0 & 61 & 0 & 17 & 0\\
+				\hline
+				5 & 10 & 3906 & 1ms & 221 & 0 & 54 & 0\\
+				\hline
+				6 & 4 & 55987 & 24ms & 895 & 1ms & 153 & 0\\
+				\hline
+				7 & 40 & 9608000 & 318ms & 3585 & 4ms & 552 & 0\\
+				\hline
+				8 & 92 & 19173961 & 7.97 & 15721 & 23ms & 2057 & 2ms\\
+				\hline
+				9 & 352 & 435848050 & 3.36min & 72379 & 127ms & 8394 & 11ms\\
+				\hline
+				10 & 724 & >int & 2h37 & 348151 & 743ms & 35539 & 53ms\\
+				\hline
+				
+			\end{tabular}
 
 
 
