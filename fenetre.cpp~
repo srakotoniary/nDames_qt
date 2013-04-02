@@ -213,7 +213,7 @@ void Fenetre::AfficheSolution(QString typeAlgo)
                     }
                     RechercheLocal *rl = new RechercheLocal(getNbDames(),positionReine);
 
-                   listeResultat = rl->getNbSol();
+                   // listeResultat = rl->getNbSol();
                     if (!listeResultat.empty())
                     {
                         resultat = listeResultat[nbSol];
